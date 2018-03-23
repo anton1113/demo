@@ -2,8 +2,7 @@ node('master') {
 
     stage('Package jars') {
         sh 'echo package jars'
-        sh 'cat *'
-        sh 'mvn clean install'
+        sh 'mvn clean install -am -pl demo'
         archiveArtifacts artifacts: 'target/*.jar'
     }
 }
