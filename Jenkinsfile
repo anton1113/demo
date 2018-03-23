@@ -1,7 +1,8 @@
 node('master') {
 
-    stage('demo') {
-
-        sh 'echo gg'
-    }
+     stage('Package jars') {
+                sh 'echo package jars'
+                sh 'mvn clean install -DskipTests=true -am -pl ' + mavenModules
+                archiveArtifacts artifacts: 'target/*.jar'
+            }
 }
