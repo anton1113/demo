@@ -12,11 +12,7 @@ node('master') {
     }
 
     stage('Transfer jars') {
-        transferJars()
+        def targetPath = "/var/lib/demo/"
+        sh 'cp /target/*.jar ' + targetPath
     }
-}
-
-def static transferJars() {
-    def targetPath = "/var/lib/demo/"
-    sh 'cp /target/*.jar ' + targetPath
 }
