@@ -13,6 +13,6 @@ node('master') {
 
     stage('Transfer jars') {
         def targetPath = "/var/lib/demo/"
-        sh 'cp /target/*.jar ' + targetPath
+        sh 'cp target/*.jar ' + targetPath
     }
 }
