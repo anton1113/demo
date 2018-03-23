@@ -10,4 +10,13 @@ node('master') {
         sh 'mvn clean install'
         archiveArtifacts artifacts: 'target/*.jar'
     }
+
+    stage('Transfer jars') {
+        transferJars()
+    }
+}
+
+def static transferJars() {
+    def targetPath = "/var/lib/demo/"
+    sh 'cp /target/*.jar ' + targetPath
 }
