@@ -1,4 +1,4 @@
-node('demo') {
+node('jslave') {
 
     stage('demo') {
 
