@@ -12,7 +12,10 @@ node('master') {
     }
 
     stage('Transfer jars') {
-        def targetPath = "/var/lib/demo/"
-        sh 'cp target/*.jar ' + targetPath
+        sh 'scp target/*.jar root@80.211.135.72:/var/lib/demo/'
+    }
+
+    stage('Restart service') {
+        sh 'ssh root@80.211.135.72 \'systemctl restart demo\''
     }
 }
