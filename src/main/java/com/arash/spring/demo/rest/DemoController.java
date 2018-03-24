@@ -18,6 +18,11 @@ public class DemoController {
 
     @Autowired private DemoService demoService;
 
+    @RequestMapping(method = RequestMethod.GET, value = "/rest/say-hello")
+    public String sayHello() {
+        return "Hello, friend!";
+    }
+
     @RequestMapping(method = RequestMethod.POST, value = "/rest/demo")
     public Response serve(@RequestBody Request request) {
         return demoService.serve(request);
