@@ -13,9 +13,9 @@ node('master') {
 
     stage('Transfer jars') {
         sh 'scp target/*.jar root@80.211.135.72:/var/lib/demo/'
-        def dateString = new SimpleDateFormat("dd-MM-yyyy/").parse(new Date())
+        def formattedDate = new Date().format("dd-MM-yyy")
         def commitName = sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
-        def folderName = dateString + commitName
+        def folderName = formattedDate + commitName
         sh 'ssh root@80.211.135.72 \'mkdir /var/lib/demo/' + folderName +'\''
     }
 
