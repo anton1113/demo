@@ -12,11 +12,12 @@ node('master') {
     }
 
     stage('Transfer jars') {
-        sh 'scp target/*.jar root@80.211.135.72:/var/lib/demo/'
-        def formattedDate = new Date().format("dd-MM-yyy")
-        def commitName = sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
-        def folderName = formattedDate + commitName
-        sh 'ssh root@80.211.135.72 \'mkdir /var/lib/demo/' + folderName +'\''
+
+        def currDate = new Date().format("dd-MM-yyy/")
+        def lastCommitName = sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
+        def currBuildFolderName = currDate + lastCommitName
+        sh 'scp target/*.jar root@80.211.135.72:/var/lib/demo/actual'
+        sh 'scp target/*.jar root@80.211.135.72:/var/lib/demo/' + currBuildFolderName + '\''
     }
 
     stage('Restart service') {
