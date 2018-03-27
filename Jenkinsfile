@@ -14,7 +14,7 @@ node('master') {
     stage('Transfer jars') {
         sh 'scp target/*.jar root@80.211.135.72:/var/lib/demo/'
         shortCommit = sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
-        sh 'ssh root@80.211.135.72' \'mkdir /var/lib/demo/' + shortCommit +'\''
+        sh 'ssh root@80.211.135.72 \'mkdir /var/lib/demo/' + shortCommit +'\''
     }
 
     stage('Restart service') {
