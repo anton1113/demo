@@ -13,10 +13,11 @@ node('master') {
 
     stage('Transfer jars') {
 
-        def currDate = new Date().format("dd-MM-yyy/")
+        def currDate = new Date().format("dd-MM-yyy:")
         def lastCommitName = sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
         def currBuildFolderName = currDate + lastCommitName
         sh 'scp target/*.jar root@80.211.135.72:/var/lib/demo'
+        sh 'ssh root@80.211.135.72 \'mkdir /var/lib/demo/' + currBuildFolderName + '\''
         sh 'scp target/*.jar root@80.211.135.72:/var/lib/demo/' + currBuildFolderName
     }
 
