@@ -17,7 +17,7 @@ node('master') {
         def lastCommitName = sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
         def currBuildFolderName = currDate + lastCommitName
         sh 'scp target/*.jar root@80.211.135.72:/var/lib/demo/actual'
-        sh 'scp target/*.jar root@80.211.135.72:/var/lib/demo/ + currBuildFolderName'
+        sh 'scp target/*.jar root@80.211.135.72:/var/lib/demo/' + currBuildFolderName
     }
 
     stage('Restart service') {
