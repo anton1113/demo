@@ -16,12 +16,19 @@ node('master') {
         def currDate = new Date().format("dd-MM-yyy:")
         def lastCommitName = sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
         def currBuildFolderName = currDate + lastCommitName
-        sh 'scp target/*.jar root@80.211.135.72:/var/lib/demo'
-        sh 'ssh root@80.211.135.72 \'mkdir -p /var/lib/demo/' + currBuildFolderName + '\''
-        sh 'scp target/*.jar root@80.211.135.72:/var/lib/demo/' + currBuildFolderName
+
+        return {
+            sh 'scp target/*.jar root@80.211.135.72:/var/lib/demo'
+            ssh('mkdir /var/lib/demo/' + currBuildFolderName)
+            ssh('cd /var/lib/demo /var/lib/demo/' + currBuildFolderName)
+        }
     }
 
     stage('Restart service') {
         sh 'ssh root@80.211.135.72 \'systemctl restart demo\''
     }
+}
+
+def ssh(command) {
+    sh 'ssh root@80.211.135.72 \'' + command + '\''
 }
