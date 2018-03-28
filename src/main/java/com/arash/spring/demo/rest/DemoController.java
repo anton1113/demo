@@ -34,7 +34,7 @@ public class DemoController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/rest/foo")
     public String foo() {
-        return "Text sample";
+        return "What now?";
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/rest/demo")
