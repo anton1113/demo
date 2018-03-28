@@ -23,9 +23,10 @@ node('master') {
 
     stage('deploy') {
         def copyJar = 'cp /var/lib/demo/' + folderName + ' /var/lib/demo'
-        ssh(copyJar)
-        def restart = 'systemctl restart demo'
-        ssh(restart)
+        def copy = 'cp /var/lib/demo/demo-0.jar /home/anton1113'
+        ssh(copy)
+//        def restart = 'systemctl restart demo'
+//        ssh(restart)
         //sh 'ssh root@80.211.135.72 \'cp /var/lib/demo/' + folderName + ' /var/lib/demo\''
         //sh 'ssh root@80.211.135.72 \'systemctl restart demo\''
     }
@@ -33,5 +34,5 @@ node('master') {
 
 def ssh(command) {
 
-    sh 'ssh root@80.211.135.72 \'' + command + '\''
+    sh(script: 'ssh root@80.211.135.72 \'' + command + '\'')
 }
