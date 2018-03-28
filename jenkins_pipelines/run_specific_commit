@@ -1,12 +1,21 @@
 node('master') {
 
+    def userInput
+
     stage('input') {
-        def userInput = input(
+        userInput = input(
                 id: 'userInput', message: 'Please enter the parameters', parameters: [
                 [$class: 'TextParameterDefinition', description: 'Hash of the desired commit', name: 'commit hash'],
                 [$class: 'TextParameterDefinition', description: 'Date of the desired build (dd-MM-yyyy)', name: 'build date']
         ])
         echo ("Commit hash: "+userInput['commit hash'])
-        echo ("Target: "+userInput['build date'])
+        echo ("Commit date: "+userInput['build date'])
+    }
+
+    stage('deploy') {
+        def commitHash = userInput['commit hash']
+        def buildDate = userInput['build date']
+        def folderName = sh returnStdout: true, script: 'ls | grep ' + commitHash + ' |& tail -1'
+        echo folderName
     }
 }
