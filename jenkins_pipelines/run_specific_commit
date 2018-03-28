@@ -15,7 +15,7 @@ node('master') {
     stage('deploy') {
         def commitHash = userInput['commit hash']
         def buildDate = userInput['build date']
-        def folderName = sh returnStdout: true, script: 'ls | grep ' + commitHash + ' |& tail -1'
+        def folderName = sh returnStdout: true, script: 'ls | grep ' + commitHash
         echo folderName
     }
 }
