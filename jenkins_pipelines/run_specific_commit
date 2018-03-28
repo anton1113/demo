@@ -1,6 +1,7 @@
 node('master') {
 
     def userInput
+    def folderName
 
     stage('input') {
         userInput = input(
@@ -12,10 +13,16 @@ node('master') {
         echo ("Commit date: "+userInput['build date'])
     }
 
-    stage('deploy') {
+    stage('getFolderName') {
         def commitHash = userInput['commit hash']
         def buildDate = userInput['build date']
-        def folderName = sh(script: 'ssh root@80.211.135.72 \'ls /var/lib/demo | grep ' + commitHash + ' | tail -1\'', returnStdout: true)
+        def grepParam = commitHash != null ? commitHash : buildDate
+        folderName = sh(script: 'ssh root@80.211.135.72 \'ls /var/lib/demo | grep ' + grepParam + ' | tail -1\'', returnStdout: true)
         echo folderName
+    }
+
+    stage('deploy') {
+        sh 'ssh root@80.211.135.72 \'cp /var/lib/demo/' + folderName + ' /var/lib/demo\''
+        sh 'ssh root@80.211.135.72 \'systemctl restart demo\''
     }
 }

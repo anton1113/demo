@@ -32,6 +32,11 @@ public class DemoController {
         return sdf.format(new Date());
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/rest/foo")
+    public String foo() {
+        return "Text from old commit";
+    }
+
     @RequestMapping(method = RequestMethod.POST, value = "/rest/demo")
     public Response serve(@RequestBody Request request) {
         return demoService.serve(request);
