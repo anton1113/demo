@@ -24,12 +24,11 @@ node('master') {
     stage('deploy') {
         String folder = folderName
         folder = folder.trim()
-        def copyJar = 'cp /var/lib/demo/' + folder + ' /var/lib/demo'
+        def copyJar = 'cp /var/lib/demo/' + folder + '/demo-0.jar /var/lib/demo'
+        def restart = 'systemctl restart demo'
+
         ssh(copyJar)
-//        def restart = 'systemctl restart demo'
-//        ssh(restart)
-        //sh 'ssh root@80.211.135.72 \'cp /var/lib/demo/' + folderName + ' /var/lib/demo\''
-        //sh 'ssh root@80.211.135.72 \'systemctl restart demo\''
+        ssh(restart)
     }
 }
 
