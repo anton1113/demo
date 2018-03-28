@@ -19,7 +19,7 @@ node('master') {
 
         return {
             sh 'scp target/*.jar root@80.211.135.72:/var/lib/demo'
-            ssh('mkdir /var/lib/demo/' + currBuildFolderName)
+            ssh('mkdir -p /var/lib/demo/' + currBuildFolderName)
             ssh('cd /var/lib/demo /var/lib/demo/' + currBuildFolderName)
         }
     }
