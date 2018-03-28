@@ -22,7 +22,18 @@ node('master') {
     }
 
     stage('deploy') {
-        sh 'ssh root@80.211.135.72 \'cp /var/lib/demo/' + folderName + ' /var/lib/demo\''
-        sh 'ssh root@80.211.135.72 \'systemctl restart demo\''
+        def copyJar = 'cp /var/lib/demo/' + folderName + ' /var/lib/demo'
+        ssh(copyJar)
+        def restart = 'systemctl restart demo'
+        ssh(restart)
+        //sh 'ssh root@80.211.135.72 \'cp /var/lib/demo/' + folderName + ' /var/lib/demo\''
+        //sh 'ssh root@80.211.135.72 \'systemctl restart demo\''
     }
+
+
+}
+
+def ssh(command) {
+
+    sh 'ssh root@80.211.135.72 \'' + command + '\''
 }
