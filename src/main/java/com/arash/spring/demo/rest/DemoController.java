@@ -34,7 +34,7 @@ public class DemoController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/rest/foo")
     public String foo() {
-        return "This is a new commit text";
+        return "Another different text";
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/rest/demo")
