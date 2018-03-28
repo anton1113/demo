@@ -1,0 +1,6 @@
+node('master') {
+
+    stage('echo') {
+        sh 'echo it\'s ok'
+    }
+}
