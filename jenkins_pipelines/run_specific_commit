@@ -22,8 +22,9 @@ node('master') {
     }
 
     stage('deploy') {
+        def jarName = 'demo-0.jar'
         def copyJar = 'cp /var/lib/demo/' + folderName + ' /var/lib/demo'
-        def copy = 'cp /var/lib/demo/demo-0.jar /home/anton1113'
+        def copy = 'cp /var/lib/demo/' + jarName + ' /home/anton1113'
         ssh(copy)
 //        def restart = 'systemctl restart demo'
 //        ssh(restart)
