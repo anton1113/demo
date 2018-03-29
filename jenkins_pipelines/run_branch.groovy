@@ -7,6 +7,7 @@ node('master') {
                 id: 'userInput', message: 'Please enter the branch name', parameters: [
                 [$class: 'TextParameterDefinition', description: 'Name of the branch to build', name: 'branch name']
         ])
+        echo ("Branch name: " + userInput['branch name'])
     }
 
     def branchName = userInput['branch name']
