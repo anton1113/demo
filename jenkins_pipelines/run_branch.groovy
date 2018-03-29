@@ -5,7 +5,7 @@ node('master') {
     stage('input') {
         userInput = input(
                 id: 'userInput', message: 'Please enter the branch name', parameters: [
-                [$class: 'TextParameterDefinition', description: 'Name of the branch to build', name: 'branch name'],
+                [$class: 'TextParameterDefinition', description: 'Name of the branch to build', name: 'branch name']
         ])
     }
 
