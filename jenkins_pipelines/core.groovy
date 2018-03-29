@@ -1,8 +1,5 @@
-var foo = "Some static text"
 
 def build() {
-
-    println foo
 
     stage('Package jars') {
         sh 'mvn clean install'
