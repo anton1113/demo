@@ -8,7 +8,7 @@ def build() {
 
     stage('Transfer jars') {
 
-        def currDate = new Date().format("yyyy-MM-dd")
+        def currDate = new Date().format("yyy-MM-dd:")
         def lastCommitName = sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
         def currBuildFolderName = currDate + lastCommitName
 
