@@ -4,34 +4,19 @@ node('master') {
 
     stage('input') {
         userInput = input(
-                id: 'userInput', message: 'Please enter the parameters', parameters: [
-                [$class: 'TextParameterDefinition', description: 'Hash of the desired commit', name: 'commit hash'],
-                [$class: 'TextParameterDefinition', description: 'Date of the desired build (dd-MM-yyyy)', name: 'build date']
+                id: 'userInput', message: 'Please enter the branch name', parameters: [
+                [$class: 'TextParameterDefinition', description: 'Name of the branch to build', name: 'branch name'],
         ])
-        echo ("Commit hash: "+userInput['commit hash'])
-        echo ("Commit date: "+userInput['build date'])
     }
 
-    stage('getFolderName') {
-        def commitHash = userInput['commit hash']
-        def buildDate = userInput['build date']
-        def grepParam = commitHash != null ? commitHash : buildDate
-        folderName = sh(script: 'ssh root@80.211.135.72 \'ls /var/lib/demo | grep ' + grepParam + ' | tail -1\'', returnStdout: true)
-        echo folderName
+    def branchName = userInput['branch name']
+
+    stage('Git checkout') {
+        checkout([$class: 'GitSCM', branches: [[name: '*/' + branchName]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [],
+                  userRemoteConfigs: [[credentialsId: 'e404b1e5-89f9-4f62-ade7-aa5bcd182b55', url: 'https://anton1113@github.com/anton1113/demo.git']]])
     }
 
-    stage('deploy') {
-        String folder = folderName
-        folder = folder.trim()
-        def copyJar = 'cp /var/lib/demo/' + folder + '/demo-0.jar /var/lib/demo'
-        def restart = 'systemctl restart demo'
-
-        ssh(copyJar)
-        ssh(restart)
-    }
-}
-
-def ssh(command) {
-
-    sh(script: 'ssh root@80.211.135.72 \'' + command + '\'')
+    def core = load "jenkins_pipelines/core.groovy"
+    core.build()
+    core.restart()
 }
