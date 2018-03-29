@@ -17,6 +17,7 @@ node('master') {
         def commitHash = userInput['commit hash']
         def buildDate = userInput['build date']
         def grepParam = commitHash != null ? commitHash : buildDate
+        echo ("Grep param: " + grepParam)
         folderName = sh(script: 'ssh root@80.211.135.72 \'ls /var/lib/demo | grep ' + grepParam + ' | tail -1\'', returnStdout: true)
         echo folderName
     }
