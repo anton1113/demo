@@ -1,6 +1,0 @@
-def foo() {
-
-    println "Print some test"
-}
-
-return this
