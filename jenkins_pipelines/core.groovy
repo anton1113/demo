@@ -1,4 +1,4 @@
-def foo = "Some static text"
+var foo = "Some static text"
 
 def build() {
 
