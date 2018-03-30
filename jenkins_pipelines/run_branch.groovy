@@ -1,6 +1,8 @@
-String branchName = promptBranchName()
-def core = load "jenkins_pipelines/core.groovy"
-core.restart()
+node('master') {
+    String branchName = promptBranchName()
+    def core = load "jenkins_pipelines/core.groovy"
+    core.restart()
+}
 
 static String promptBranchName() {
 
