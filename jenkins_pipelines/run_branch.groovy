@@ -1,6 +1,10 @@
+import com.arash.spring.demo.jenkins.ServiceDeployer
+
 node('master') {
 
     def userInput
+    def serviceDeployer = new ServiceDeployer()
+    serviceDeployer.method()
 
     stage('input') {
         userInput = input(
