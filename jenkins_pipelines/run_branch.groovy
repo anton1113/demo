@@ -1,21 +1,16 @@
+String branchName = promptBranchName()
+def core = load "jenkins_pipelines/core.groovy"
+core.restart()
 
-node('master') {
+static String promptBranchName() {
 
-    def userInput
-    serviceDeployer.method()
-
+    String branchName = 'master'
     stage('input') {
-        userInput = input(
+        branchName = input(
                 id: 'userInput', message: 'Please enter the branch name', parameters: [
                 [$class: 'TextParameterDefinition', description: 'Name of the branch to build', name: 'branch name']
         ])
-        echo ("Branch name: " + userInput)
+        echo ("Branch name: ${userInput} ")
     }
-
-    def branchName = userInput
-
-
-    def core = load "jenkins_pipelines/core.groovy"
-    //core.build()
-    core.restart()
+    return branchName
 }
