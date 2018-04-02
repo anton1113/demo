@@ -1,4 +1,4 @@
-def globalVariable = 'I am a global String'
+globalVariable = 'I am a global String'
 
 def foo() {
     println globalVariable
