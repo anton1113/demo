@@ -1,7 +1,7 @@
 node('master') {
 
     sh 'pwd'
-    input message: 'Approve build?', submitter: 'admin_group'
+    sh 'ls -1'
     def core = load "jenkins_pipelines/JenkinsCore.groovy"
     core.foo()
 }
