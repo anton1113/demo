@@ -11,7 +11,9 @@ node('master') {
 
     sh 'pwd'
     sh 'ls -1'
-    error('This is an error')
+    stage('error') {
+        error('This is an error')
+    }
     def core = load "jenkins_pipelines/JenkinsCore.groovy"
     core.foo()
 }
