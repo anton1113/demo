@@ -1,5 +1,6 @@
 node('master') {
 
+    sh 'rm -r *'
     sh 'pwd'
     sh 'ls -1'
 
