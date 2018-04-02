@@ -1,7 +1,9 @@
 globalVariable = 'I am a global String'
+anotherVariable = "I said that ${globalVariable}"
 
 def foo() {
     println globalVariable
+    println anotherVariable
 }
 
 return this
