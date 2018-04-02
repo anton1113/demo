@@ -41,4 +41,9 @@ def ssh(command) {
     sh 'ssh root@80.211.135.72 \'' + command + '\''
 }
 
+static void foo() {
+
+    println 'foo'
+}
+
 return this

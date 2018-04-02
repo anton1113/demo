@@ -1,6 +1,6 @@
 node('master') {
     String branchName = promptBranchName()
-    def core = load "jenkins_pipelines/core.groovy"
+    def core = load "jenkins_pipelines/JenkinsCore.groovy"
     core.restart()
 }
 
