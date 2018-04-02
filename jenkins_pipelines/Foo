@@ -1,0 +1,7 @@
+def globalVariable = 'I am a global String'
+
+def foo() {
+    println globalVariable
+}
+
+return this
