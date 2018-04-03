@@ -3,6 +3,7 @@ package com.arash.spring.demo.rest;
 import com.arash.spring.demo.model.Request;
 import com.arash.spring.demo.model.Response;
 import com.arash.spring.demo.service.DemoService;
+import com.arash.spring.demo.service.GroovyGreeter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,7 @@ import java.util.Date;
 public class DemoController {
 
     @Autowired private DemoService demoService;
+    @Autowired private GroovyGreeter groovyGreeter;
 
     @RequestMapping(method = RequestMethod.GET, value = "/rest/say-hello")
     public String sayHello() {
@@ -34,7 +36,7 @@ public class DemoController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/rest/foo")
     public String foo() {
-        return "What now?";
+        return groovyGreeter.sayHello();
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/rest/demo")
